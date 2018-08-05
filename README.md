@@ -114,7 +114,7 @@ WHERE user_id IN (
 
 其中 `select user_id2 as user_id from friend where user_id1 = 111` 和 `select user_id1 as user_id from friend where user_id2 = 111` 是两个子查询，分别查询出好友表中 `user_id1 = 111` 的 `user_id2` 的数据和 `user_id2 = 111` 的 `user_id1` 的数据。在 MySQL 数据库执行 SQL 语句，结果如图1-6所示。
 
-![](img/Screen Shot 2018-08-05 at 15.52.57.png)
+![](img/查询.png)
 
 ### 1.5 网络拓扑图
 
@@ -542,11 +542,11 @@ public class ClientInfo {
 
 客户端启动马上显示用户登录窗口，界面如图5-14所示，界面中有很多组件，但是本例中主要使用文本框、密码框和两个按钮。等用户输入 QQ 号码和 QQ 密码，单击「登录」按钮，如果输入的账号和密码正确，则登录成功进入好友列表窗口；如果输入的不正确，则弹出如图5-15所示的对话框。
 
-![登陆窗口](img/Screen Shot 2018-08-05 at 19.56.20.png)
+![登陆窗口](img/登陆窗口.png)
 
-![登陆失败提示](img/Screen Shot 2018-08-05 at 19.56.24.png)
+![登陆失败提示](img/登陆失败提示.png)
 
-登录窗口类是 LoginFrame，它的类图如图5-16所示。
+登录窗口类是 `LoginFrame`，它的类图如图5-16所示。
 
 ![登陆窗口类](img/登陆窗口类图.png)
 
