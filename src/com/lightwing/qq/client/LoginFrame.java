@@ -37,17 +37,18 @@ public class LoginFrame extends JFrame {
             // 先进行用户输入验证，验证通过再登录
             String userId = txtUserId.getText();
             String password = new String(txtUserPwd.getPassword());
-
             Map user = login(userId, password);
             if (user != null) {
                 // 登录成功调转界面
-                System.out.println("登录成功调转界面");
+                System.out.println("Login Success");
                 // 设置登录窗口可见
                 this.setVisible(false);
                 FriendsFrame frame = new FriendsFrame(user);
                 frame.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Sorry, Wrong Password or QQ Number");
+                JOptionPane.showMessageDialog(
+                        null, "Sorry, Wrong Password or QQ Number"
+                );
             }
         });
 
@@ -87,7 +88,6 @@ public class LoginFrame extends JFrame {
         int y = (int) (screenHeight - frameHeight) / 2;
         // 设置窗口位于屏幕中心
         setLocation(x, y);
-
         // 注册窗口事件
         addWindowListener(new WindowAdapter() {
             // 单击窗口关闭按钮时调用
@@ -115,9 +115,10 @@ public class LoginFrame extends JFrame {
             DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT);
             // 发送
             Client.socket.send(packet);
-
             // 接收数据报
-            packet = new DatagramPacket(buffer, buffer.length, address, Client.SERVER_PORT);
+            packet = new DatagramPacket(
+                    buffer, buffer.length, address, Client.SERVER_PORT
+            );
             Client.socket.receive(packet);
             // 接收数据长度
             int len = packet.getLength();
