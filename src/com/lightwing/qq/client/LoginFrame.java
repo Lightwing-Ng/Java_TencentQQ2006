@@ -38,6 +38,7 @@ public class LoginFrame extends JFrame {
             String userId = txtUserId.getText();
             String password = new String(txtUserPwd.getPassword());
             Map user = login(userId, password);
+
             if (user != null) {
                 // 登录成功调转界面
                 System.out.println("Login Success");
@@ -47,7 +48,8 @@ public class LoginFrame extends JFrame {
                 frame.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(
-                        null, "Sorry, Wrong Password or QQ Number"
+                        null,
+                        "Sorry, Wrong Password or QQ Number"
                 );
             }
         });
@@ -72,13 +74,12 @@ public class LoginFrame extends JFrame {
 
         /// 初始化当前窗口
         setIconImage(Toolkit.getDefaultToolkit().getImage(Client.class.getResource("/resource/img/QQ.png")));
-        setTitle("QQ Beta Login");
+        setTitle("QQ2006(Beta) Login");
         setResizable(false);
         getContentPane().setLayout(null);
-        // 设置窗口大小
-        int frameWidth = 329;
         // 登录窗口宽高
-        int frameHeight = 250;
+        int frameWidth = 329, frameHeight = 250;
+        // 设置窗口大小
         setSize(frameWidth, frameHeight);
         // 计算窗口位于屏幕中心的坐标
         // 获得当前屏幕的宽高
