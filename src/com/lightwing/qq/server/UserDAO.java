@@ -17,13 +17,13 @@ class UserDAO {
         String sql = "SELECT " +
                 "`user_id`, `user_pwd`, `user_name`, `user_icon` " +
                 "FROM `user` " +
-                "WHERE `user_id`";
+                "WHERE `user_id` = ?";
         try (// 2.创建数据库连接
              Connection conn = DBHelper.getConnection();
              // 3. 创建语句对象
              PreparedStatement pstmt = conn.prepareStatement(sql);
              // 5. 执行查询
-             ResultSet rs = pstmt.executeQuery();) {
+             ResultSet rs = pstmt.executeQuery()) {
             // 6. 遍历结果集
             while (rs.next()) {
                 Map<String, String> row = new HashMap<String, String>();
@@ -31,10 +31,8 @@ class UserDAO {
                 row.put("user_name", rs.getString("user_name"));
                 row.put("user_pwd", rs.getString("user_pwd"));
                 row.put("user_icon", rs.getString("user_icon"));
-
                 list.add(row);
             }
-
         } catch (SQLException ignored) {
         }
         return list;

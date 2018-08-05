@@ -119,7 +119,8 @@ public class Server {
                         // 向请求登录的客户端发送数据
                         socket.send(packet);
                     }
-                } else if (cmd == COMMAND_SENDMSG) {// 用户发送消息
+                } else if (cmd == COMMAND_SENDMSG) {
+                    // 用户发送消息
                     // 获得好友Id
                     String friendUserId = (String) jsonObj.get("receive_user_id");
 
@@ -136,7 +137,8 @@ public class Server {
                             break;
                         }
                     }
-                } else if (cmd == COMMAND_LOGOUT) {// 用户发送注销命令
+                } else if (cmd == COMMAND_LOGOUT) {
+                    // 用户发送注销命令
                     // 获得用户Id
                     String userId = (String) jsonObj.get("user_id");
 
@@ -150,7 +152,6 @@ public class Server {
 
                     // 向其他客户端广播该用户下线
                     for (ClientInfo info : clientList) {
-
                         jsonObj = new JSONObject();
                         jsonObj.put("user_id", userId);
                         jsonObj.put("online", "0");

@@ -22,7 +22,7 @@ public class DBHelper {
         try {
             // 加载属性文件内容到 Properties 对象
             info.load(input);
-            // 从属性文件中取出url
+            // 从属性文件中取出 url
             url = info.getProperty("url");
             // 从属性文件中取出 driver
             String driverClassName = info.getProperty("driver");
