@@ -22,9 +22,9 @@ QQ2006 是一个网络即时聊天工具，即时聊天工具可以在两名或�
 
 - Gtalk：Google 的即时通讯工具。
 
-- Skype：该软件由 Dane、Janus Friis、Swede 联合编写软件后台的爱沙尼亚人 Ahti Heinla、Priit Kasesalu 和 Jaan Tallinn 共同发布。Skype所 采用的后台也被音乐分享软件Kazaa 所使用。2005年9月，eBay 以26亿美元的价格购得Skype。
+- Skype：该软件由 Dane、Janus Friis、Swede 联合编写软件后台的爱沙尼亚人 Ahti Heinla、Priit Kasesalu 和 Jaan Tallinn 共同发布。Skype 所采用的后台也被音乐分享软件 Kazaa 所使用。2005年9月，eBay 以26亿美元的价格购得 Skype。
 
-- WeChat：基于移动平台的即时通讯工具。
+- WeChat：基于移动平台的成功即时通讯工具。
 
 ### 1.2　需求分析
 
@@ -57,7 +57,7 @@ QQ2006 项目工具分为有**客户端**和**服务器端**，客户端和服�
 
 服务器端没有界面，没有原型设计。客户端有原型设计，原型设计主要应用于图形界面应用程序，原型设计对于设计人员、开发人员、测试人员、UI 设计人员以及用户都是非常重要的。QQ2006 项目客户端原型设计图如图1-3所示。
 
-![]()
+![](img/原型设计图.png)
 
 ### 1.4 数据库设计
 
@@ -65,7 +65,7 @@ QQ2006 项目工具分为有**客户端**和**服务器端**，客户端和服�
 
 #### 01 用户表
 
-用户表（英文名 user）是 QQ2006 的注册用户，用户 Id（英文名user_id）是主键，用户表结构如表1-1所示。
+用户表（英文名 user）是 QQ2006 的注册用户，用户 Id（英文名 user_id）是主键，用户表结构如表1-1所示。
 
 ##### 表1-1 用户表
 
@@ -76,7 +76,7 @@ QQ2006 项目工具分为有**客户端**和**服务器端**，客户端和服�
 | user_name | VARCHAR(80)  | 80   | -    | N    | N    | 用户名   |
 | user_icon | VARCHAR(100) | 100  | -    | N    | N    | 用户头像 |
 
-用户好友表用户好友表（英文名 friend）只有两个字段用户 Id1 和用户 Id2，它们是用户好友的联合主键，给定一个用户Id1和用户Id2
+用户好友表用户好友表（英文名 friend）只有两个字段用户 Id1 和用户 Id2，它们是用户好友的联合主键，给定一个用户 Id1 和用户 Id2
 可以确定用户好友表中唯一一条数据，这是「主键约束」。用户好友表与用户表关系比较复杂，用户好友表的两个字段都引用到用户表用户 
 Id 字段，用户好友表中的用户 Id1 和用户 Id2 都是必须是用户表中存在的用户 Id，这是「外键约束」，用户好友表结构如表1-2所示。
 
@@ -120,7 +120,7 @@ WHERE user_id IN (
 
 QQ2006 项目分为客户端和服务器，采用 C/S（客户端/服务器）网络结构，如图1-7所示，服务器只有一个，客户端可以有多个。
 
-![QQ2006项目网络结构]()
+![QQ2006项目网络结构](img/项目网络结构.png)
 
 ### 1.6 系统设计
 
@@ -136,10 +136,10 @@ QQ2006 项目分为客户端和服务器，采用 C/S（客户端/服务器）�
 
 服务器系统设计如图1-9所示，服务器端没有图像用户界面，服务器端4个类说明如下：
 
-- Server：服务器端启动类。
-- UserDAO：服务器端用户信息 DAO 类，用来操作数据库用户表。
-- DBHelper：连接数据库辅助类。
-- ClientInfo：服务器端保存客户端信息类，userId 属性是客户Id、address 属性客户端地址、port 是客户端端口号。
+- `Server`：服务器端启动类。
+- `UserDAO`：服务器端用户信息 DAO 类，用来操作数据库用户表。
+- `DBHelper`：连接数据库辅助类。
+- `ClientInfo`：服务器端保存客户端信息类，userId 属性是客户 Id、address 属性客户端地址、port 是客户端端口号。
 
 ![服务器端系统设计类图](img/服务端系统设计类图.png)
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 
 
-/* 用户好友表Id1和Id2互为好友 */
+/* 用户好友表 Id1 和 Id2 互为好友 */
 CREATE TABLE IF NOT EXISTS `friend` (
     user_id1 VARCHAR(80) NOT NULL, /* 用户Id1  */
     user_id2 VARCHAR(80) NOT NULL, /* 用户Id2  */
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `friend` (
 );
 ```
 
-如果读者对于编写 DDL 脚本不熟悉，可以直接使用笔者编写好的 database.sql  脚本文件，文件位于 QQ2006 项目下 db 目录中。
+如果读者对于编写 DDL 脚本不熟悉，可以直接使用笔者编写好的 `database.sql`  脚本文件，文件位于 QQ2006 项目下 db 目录中。
 
 ### 2.3 迭代1.3：插入初始数据到数据库
 
@@ -220,7 +220,7 @@ QQ2006 项目创建完成后，需要参考如图3-10所示，在 QQ2006 项目�
 
 ### 3.2　任务2.2：添加资源图片
 
-项目中会用到很多资源图片，为了打包发布项目方便，这些图片最好放到 src 源文件夹下，IDEA 会将该文件夹下有文件一起复制到字节码文件夹中。参考图30-10在 src 文件夹下创建resource/img 文件夹，然后将本书配套资源中找到 images 中的图片，并复制到 IDEA 项目的 resource/img 文件夹中。
+项目中会用到很多资源图片，为了打包发布项目方便，这些图片最好放到 src 源文件夹下，IDEA 会将该文件夹下有文件一起复制到字节码文件夹中。参考图30-10在 src 文件夹下创建 `resource/img` 文件夹，然后将本书配套资源中找到 images 中的图片，并复制到 IDEA 项目的 `resource/img` 文件夹中。
 
 ### 3.3 任务2.3：添加 JSON-java 库
 
@@ -230,9 +230,9 @@ QQ2006 项目创建完成后，需要参考如图3-10所示，在 QQ2006 项目�
 
 参考图3-10在 src 文件夹中创建如下3个包：
 
-- com.lightwing.qq.client。放置客户端组件。
-- com.lightwing.qq.server。放置服务器端组件。
-- org.json。放置 JSON-java 库类。
+- `com.lightwing.qq.client` 放置客户端组件。
+- `com.lightwing.qq.server` 放置服务器端组件。
+- `org.json` 放置 JSON-java 库类。
 
 ## 4　任务3：编写服务器端外围代码
 
@@ -252,7 +252,7 @@ public List<Map<String, String>> findFriends(String id)
 
 ![DAO实现类图](img/UserDAO实现类图.png)
 
-UserDAO 代码如下：
+`UserDAO` 代码如下：
 
 ```java
 package com.lightwing.qq.server;
@@ -302,7 +302,7 @@ class UserDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        // SQL语句
+        // SQL 语句
         String sql = "SELECT " +
                 "`user_id`, `user_pwd`, `user_name`, `user_icon` " +
                 "FROM " +
@@ -359,7 +359,7 @@ class UserDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Map<String, String>> friends = new ArrayList<>();
-        // SQL语句
+        // SQL 语句
         String sql = "SELECT " +
                 "`user_id`, `user_pwd`, `user_name`, `user_icon` " +
                 "FROM " +
@@ -444,7 +444,7 @@ public class DBHelper {
     private static Properties info = new Properties();
 
     // 1.驱动程序加载
-    static {
+    static { ①
         // 获得属性文件输入流
         InputStream input = DBHelper.class.getClassLoader()
                 .getResourceAsStream("com/lightwing/qq/server/config.properties");
@@ -452,8 +452,8 @@ public class DBHelper {
         try {
             // 加载属性文件内容到 Properties 对象
             info.load(input);
-            // 从属性文件中取出url
-            url = info.getProperty("url"); ①
+            // 从属性文件中取出 url
+            url = info.getProperty("url");
             // 从属性文件中取出 driver
             String driverClassName = info.getProperty("driver");
             Class.forName(driverClassName);
@@ -489,7 +489,7 @@ verifyServerCertificate=false
 
 ### 4.3　任务3.3：编写 ClientInfo 类
 
-一个用户可以在任何一个客户端主机上登录，因此登录的客户端主机 IP 和端口号都是动态的。为了在服务器端保存所有登录的用户 ID，以及登录的客户端主机地址和端口号信息，所以设计了 ClientInfo 类。如图4-13所示是 ClientInfo 详细类图。
+一个用户可以在任何一个客户端主机上登录，因此登录的客户端主机 IP 和端口号都是动态的。为了在服务器端保存所有登录的用户 ID，以及登录的客户端主机地址和端口号信息，所以设计了 `ClientInfo` 类。如图4-13所示是 `ClientInfo` 详细类图。
 
 ![ClientInfo类图](img/ClientInfo类图.png)
 
@@ -550,7 +550,7 @@ public class ClientInfo {
 
 ![登陆窗口类](img/登陆窗口类图.png)
 
-用户登录窗口 LoginFrame 代码如下：
+用户登录窗口 `LoginFrame` 代码如下：
 
 ```java
 package com.lightwing.qq.client;
@@ -567,9 +567,9 @@ import java.net.InetAddress;
 import java.util.Map;
 
 public class LoginFrame extends JFrame {
-    // QQ号码文本框
+    // QQ 号码文本框
     private JTextField txtUserId = null;
-    // QQ密码框
+    // QQ 密码框
     private JPasswordField txtUserPwd = null;
 
     public LoginFrame() {
@@ -588,7 +588,7 @@ public class LoginFrame extends JFrame {
         btnLogin.setText("登录");
         getContentPane().add(btnLogin);
         // 注册登录按钮事件监听器
-        btnLogin.addActionListener(e -> {
+        btnLogin.addActionListener(e -> { ③
             // 先进行用户输入验证，验证通过再登录
             String userId = txtUserId.getText();
             String password = new String(txtUserPwd.getPassword());
@@ -625,7 +625,7 @@ public class LoginFrame extends JFrame {
         getContentPane().add(btnSetup);
 
         /// 初始化当前窗口
-        setIconImage(Toolkit.getDefaultToolkit().getImage(Client.class.getResource("/resource/img/QQ.png")));
+         setIconImage(Toolkit.getDefaultToolkit().getImage(Client.class.getResource("/resource/img/QQ.png"))); ④
         setTitle("QQ登录");
         setResizable(false);
         getContentPane().setLayout(null);
@@ -641,10 +641,10 @@ public class LoginFrame extends JFrame {
         double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight(); ②
         int y = (int) (screenHeight - frameHeight) / 2;
         // 设置窗口位于屏幕中心
-        setLocation(x, y);
+        setLocation(x, y); ⑤
 
         // 注册窗口事件
-        addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() { ⑥
             // 单击窗口关闭按钮时调用
             public void windowClosing(WindowEvent e) {
                 // 退出系统
@@ -692,7 +692,7 @@ public class LoginFrame extends JFrame {
     }
 
     // 蓝线面板
-    private JPanel getPaneLine() {
+    private JPanel getPaneLine() { ⑦
         JPanel paneLine = new JPanel();
         paneLine.setLayout(null);
         paneLine.setBounds(7, 54, 308, 118);
@@ -750,7 +750,13 @@ public class LoginFrame extends JFrame {
 }
 ```
 
-上述代码第①行和第②行是获取当前屏幕的宽和高，用来介绍当前窗口屏幕居中的坐标。具体的原理在25.5.7节已经介绍过程，这里不再赘述。代码第③行是用户单击登录按钮之后的处理，本节暂时不介绍具体实现过程，后面介绍登录处理时在详细说明。代码第④行~第⑤行的初始化登录窗口，包括设置窗口图标，窗口大小和位置等内容。代码第⑥行注册窗口事件，当用户单击窗口的关闭按钮时调用 `System.exit(0)` 语句退出系统。代码第⑦行的 `getPaneLine()` 方法用来初始化「蓝线面板」，蓝线面板如图5-17所示的虚线部分，其中包括：一个文本框、一个密码框、两个复选框和三个标签。
+上述代码第①行和第②行是获取当前屏幕的宽和高，用来介绍当前窗口屏幕居中的坐标。具体的原理在25.5.7节已经介绍过程，这里不再赘述。
+
+代码第③行是用户单击登录按钮之后的处理，本节暂时不介绍具体实现过程，后面介绍登录处理时在详细说明。
+
+代码第④行~第⑤行的初始化登录窗口，包括设置窗口图标，窗口大小和位置等内容。代码第⑥行注册窗口事件，当用户单击窗口的关闭按钮时调用 `System.exit(0)` 语句退出系统。
+
+代码第⑦行的 `getPaneLine()` 方法用来初始化「蓝线面板」，蓝线面板如图5-17所示的虚线部分，其中包括：一个文本框、一个密码框、两个复选框和三个标签。
 
 ![登录窗口中的蓝线面板](img/登录窗口中的蓝线面板.png)
 
@@ -785,7 +791,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FriendsFrame extends JFrame implements Runnable {
-
     // 线程运行状态
     private boolean isRunning = true;
     // 好友标签控件列表
@@ -831,28 +836,28 @@ public class FriendsFrame extends JFrame implements Runnable {
         panel1.add(friendListPanel);
         friendListPanel.setLayout(new GridLayout(50, 0, 0, 5));
 
-        lblFriendList = new ArrayList<>();
+        lblFriendList = new ArrayList<>(); ①
         // 初始化好友列表
-        for (Map<String, String> friend : friends) {
+        for (Map<String, String> friend : friends) { ②
             String friendUserId = friend.get("user_id");
             String friendUserName = friend.get("user_name");
             String friendUserIcon = friend.get("user_icon");
             // 获得好友在线状态
             String friendUserOnline = friend.get("online");
-            JLabel lblFriend = new JLabel(friendUserName);
-            lblFriend.setToolTipText(friendUserId);
+            JLabel lblFriend = new JLabel(friendUserName); ③
+            lblFriend.setToolTipText(friendUserId); ④
             String friendIconFile = String.format("/resource/img/%s.jpg", friendUserIcon);
             lblFriend.setIcon(new ImageIcon(FriendsFrame.class.getClass().getResource(friendIconFile)));
             // 在线设置可用，离线设置不可用
-            if (friendUserOnline.equals("0")) {
+            if (friendUserOnline.equals("0")) { ⑤
                 lblFriend.setEnabled(false);
             } else {
                 lblFriend.setEnabled(true);
             }
 
-            lblFriend.addMouseListener(new MouseAdapter() {
+            lblFriend.addMouseListener(new MouseAdapter() { ⑥
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(MouseEvent e) { ①
                     // 用户图标双击鼠标时显示对话框
                     if (e.getClickCount() == 2) {
                         ChatFrame chatFrame = new ChatFrame(FriendsFrame.this, user, friend);
@@ -867,7 +872,7 @@ public class FriendsFrame extends JFrame implements Runnable {
             friendListPanel.add(lblFriend);
         }
 
-        /// 初始化当前Frame
+        /// 初始化当前 Frame
         setSize(150, 600);
         // 获得当前屏幕的宽
         double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -880,7 +885,7 @@ public class FriendsFrame extends JFrame implements Runnable {
         // 注册窗口事件
         addWindowListener(new WindowAdapter() {
             // 单击窗口关闭按钮时调用
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(WindowEvent e) { ⑦
                 // 准备一个缓冲区
                 byte[] buffer = new byte[0b10000000000];
                 // 当前用户下线
@@ -892,7 +897,7 @@ public class FriendsFrame extends JFrame implements Runnable {
                 InetAddress address;
                 try {
                     address = InetAddress.getByName(Client.SERVER_IP);
-                    // 创建DatagramPacket对象
+                    // 创建 DatagramPacket 对象
                     DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT);
                     // 发送
                     Client.socket.send(packet);
@@ -938,7 +943,7 @@ public class FriendsFrame extends JFrame implements Runnable {
     void refreshFriendList(String userId, String online) {
         // 初始化好友列表
         for (JLabel lblFriend : lblFriendList) {
-            // 判断用户Id是否一致
+            // 判断用户 Id 是否一致
             if (userId.equals(lblFriend.getToolTipText())) {
                 if (online.equals("1")) {
                     lblFriend.setEnabled(true);
@@ -960,7 +965,7 @@ public class FriendsFrame extends JFrame implements Runnable {
 }
 ```
 
-上述代码第①行实例化 lblFriendList 对象，它保存了好友标签组件集合。代码第②行通过循环初始化好友列表，显示的好友名和图标事实上是一个标签组件（JLabel），代码第③行是创建标签组，显示的内容是好友名。代码第④ `lblFriend.setToolTipText(friendUserId)` 是设置好友的 ID，标签的 `setToolTipText` 方法设置 `ToolTipText` 属性，该属性是当鼠标放到标签上时弹出的气泡。代码第⑤行是设置好友标签是否可用，好友在线可用，好友离线不可用。代码第⑥行是为好友标签注册鼠标双击事件。代码第⑦行是窗口关闭时调用，在该方法中进行用户下线处理。另外，有关用户下线、启动接收消息子线程和刷新好友列表，这些处理会在后面再详细介绍。
+上述代码第①行实例化 `lblFriendList` 对象，它保存了好友标签组件集合。代码第②行通过循环初始化好友列表，显示的好友名和图标事实上是一个标签组件（JLabel），代码第③行是创建标签组，显示的内容是好友名。代码第④ `lblFriend.setToolTipText(friendUserId)` 是设置好友的 ID，标签的 `setToolTipText` 方法设置 `ToolTipText` 属性，该属性是当鼠标放到标签上时弹出的气泡。代码第⑤行是设置好友标签是否可用，好友在线可用，好友离线不可用。代码第⑥行是为好友标签注册鼠标双击事件。代码第⑦行是窗口关闭时调用，在该方法中进行用户下线处理。另外，有关用户下线、启动接收消息子线程和刷新好友列表，这些处理会在后面再详细介绍。
 
 ### 5.3　迭代4.3：聊天窗口实现
 
@@ -970,7 +975,7 @@ public class FriendsFrame extends JFrame implements Runnable {
 
 ![(b)]()
 
-聊天窗口类是 ChatFrame，它的类图如图5-21所示。
+聊天窗口类是 `ChatFrame`，它的类图如图5-21所示。
 
 ![聊天窗口类图](img/聊天窗口类图.png)
 
@@ -999,11 +1004,11 @@ public class ChatFrame extends JFrame implements Runnable {
 
     private boolean isRunning = true;
 
-    // 当前用户Id
+    // 当前用户 Id
     private String userId;
-    // 聊天好友用户Id
+    // 聊天好友用户 Id
     private String friendUserId;
-    // 聊天好友用户Id
+    // 聊天好友用户 Id
     private String friendUserName;
 
     // 查看消息文本区
@@ -1015,7 +1020,7 @@ public class ChatFrame extends JFrame implements Runnable {
 
     // 日期格式化
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    // 好友列表Frame
+    // 好友列表 Frame
     private FriendsFrame friendsFrame;
 
     public ChatFrame(FriendsFrame friendsFrame, Map<String, String> user, Map<String, String> friend) {
@@ -1036,7 +1041,7 @@ public class ChatFrame extends JFrame implements Runnable {
         // 初始化发送消息面板
         getContentPane().add(getPanLine2());
 
-        /// 初始化当前Frame
+        /// 初始化当前 Frame
         String iconFile = String.format("/resource/img/%s.jpg", userIcon);
         setIconImage(Toolkit.getDefaultToolkit().getImage(Client.class.getResource(iconFile)));
         String title = String.format("与%s聊天中...", friendUserName);
@@ -1044,18 +1049,18 @@ public class ChatFrame extends JFrame implements Runnable {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        // 设置Frame大小
+        // 设置 Frame 大小
         // 登录窗口宽高
         int frameWidth = 345;
         int frameHeight = 310;
         setSize(frameWidth, frameHeight);
-        // 计算Frame位于屏幕中心的坐标
+        // 计算 Frame 位于屏幕中心的坐标
         double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         int x = (int) (screenWidth - frameWidth) / 2;
         // 获得当前屏幕的高宽
         double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         int y = (int) (screenHeight - frameHeight) / 2;
-        // 设置Frame位于屏幕中心
+        // 设置 Frame 位于屏幕中心
         setLocation(x, y);
 
         // 接收消息子线程
@@ -1213,7 +1218,7 @@ public class ChatFrame extends JFrame implements Runnable {
 
 第③步：返回给用户1登录结果。服务器端将登录结果发给客户端。
 
-![用户登陆过程]()
+![用户登陆过程](img/用户登陆过程.png)
 
 ### 6.1 迭代5.1：客户端启动
 
@@ -1227,27 +1232,27 @@ import java.net.DatagramSocket;
 
 public class Client {
     // 命令代码
-    static final int COMMAND_LOGIN = 1;     // 登录命令
+    static final int COMMAND_LOGIN = 1;     // 登录命令  ①
     static final int COMMAND_LOGOUT = 2;    // 注销命令
-    static final int COMMAND_SENDMSG = 3;   // 发消息命令
-    static DatagramSocket socket;
+    static final int COMMAND_SENDMSG = 3;   // 发消息命令 ②
+    static DatagramSocket socket; ③
     // 服务器端IP
-    static String SERVER_IP = "192.168.1.113";
+    static String SERVER_IP = "192.168.1.113"; ④
     // 服务器端端口号
-    static int SERVER_PORT = 7788;
+    static int SERVER_PORT = 7788; ⑤
 
     public static void main(String[] args) {
         if (args.length == 2) {
-            SERVER_IP = args[0];
-            SERVER_PORT = Integer.parseInt(args[1]);
+            SERVER_IP = args[0]; ⑥
+            SERVER_PORT = Integer.parseInt(args[1]); ⑦
         }
         try {
             // 创建 DatagramSocket 对象，由系统分配可以使用的端口
-            socket = new DatagramSocket();
+            socket = new DatagramSocket(); ⑧
             // 设置超时5秒，不在等待接收数据
             socket.setSoTimeout(5000);
-            System.out.println("客户端运行...");
-            LoginFrame frame = new LoginFrame();
+            System.out.println("客户端运行..."); ⑨
+            LoginFrame frame = new LoginFrame(); ⑩
             frame.setVisible(true);
         } catch (IOException e) {
             e.printStackTrace();
@@ -1264,11 +1269,11 @@ public class Client {
 
 代码第④行是声明服务器端 IP 地址，由于 IP 地址硬编码并不是好的做法，可以在运行 Client 时，通过 main 主方法的 args 参数传递进来，见代码第⑥行。
 
-代码第⑤行是声明服务器端口号，端口号也可以通过 main 主方法的args参数传递进来，见代码第⑦行。
+代码第⑤行是声明服务器端口号，端口号也可以通过 main 主方法的 args 参数传递进来，见代码第⑦行。
 
 代码第⑨行是设置 socket 对象超时时间，数据报 Socket 的 receive 方法会导致线程阻塞，客户端有一个子线程一直在调用 receive 方法接收来自于服务器的数据，有时服务器会没有数据返回，如果不设置超时，那么客户端接收线程一直会被阻塞，设置了超时后，接收线程只对待5秒钟。
 
-代码第⑩行调用 LoginFrame 启动登录窗口。
+代码第⑩行调用 `LoginFrame` 启动登录窗口。
 
 ### 6.2 迭代5.2：客户端登录编程
 
@@ -1289,9 +1294,9 @@ import java.net.InetAddress;
 import java.util.Map;
 
 public class LoginFrame extends JFrame {
-    // QQ号码文本框
+    // QQ 号码文本框
     private JTextField txtUserId = null;
-    // QQ密码框
+    // QQ 密码框
     private JPasswordField txtUserPwd = null;
 
     public LoginFrame() {
@@ -1315,8 +1320,8 @@ public class LoginFrame extends JFrame {
             String userId = txtUserId.getText();
             String password = new String(txtUserPwd.getPassword());
 
-            Map user = login(userId, password);
-            if (user != null) {
+            Map user = login(userId, password); ①
+            if (user != null) { ②
                 // 登录成功调转界面
                 System.out.println("登录成功调转界面");
                 // 设置登录窗口可见
@@ -1382,28 +1387,28 @@ public class LoginFrame extends JFrame {
         InetAddress address;
         try {
             address = InetAddress.getByName(Client.SERVER_IP);
-            JSONObject jsonObj = new JSONObject();
-            jsonObj.put("command", Client.COMMAND_LOGIN);
+            JSONObject jsonObj = new JSONObject(); ③
+            jsonObj.put("command", Client.COMMAND_LOGIN); ④
             jsonObj.put("user_id", userId);
             jsonObj.put("user_pwd", password);
             // 字节数组
             byte[] b = jsonObj.toString().getBytes();
             // 创建DatagramPacket对象
-            DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT);
+            DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT); ⑤
             // 发送
-            Client.socket.send(packet);
+            Client.socket.send(packet); ⑥
 
             // 接收数据报
             packet = new DatagramPacket(buffer, buffer.length, address, Client.SERVER_PORT);
-            Client.socket.receive(packet);
+            Client.socket.receive(packet); ⑦
             // 接收数据长度
             int len = packet.getLength();
             String str = new String(buffer, 0, len);
             System.out.println("receivedjsonObj = " + str);
             JSONObject receivedjsonObj = new JSONObject(str);
 
-            if ((Integer) receivedjsonObj.get("result") == 0) {
-                Map user = receivedjsonObj.toMap();
+            if ((Integer) receivedjsonObj.get("result") == 0) { ⑧
+                Map user = receivedjsonObj.toMap(); ⑨
                 return user;
             }
 
@@ -1475,10 +1480,10 @@ public class LoginFrame extends JFrame {
 上述代码第③行~第⑥行是客户端向服务器发送登录请求。代码第③行创建 JSON 对象，它保存了发送给服务器端的数据。代码第④行将登录命令放入 JSON 对象，另外还将 QQ 号码和 QQ 密码放入 JSON 对象中，客户端发给服务器 JSON 对象内容如下：
 
 ```json
-{ 
-	"user_id": "111", 	// QQ号码 
-	"user_pwd": "123", 	// QQ密码 
-	"command": 1  		// 命令1为登录 
+{
+    "user_id":"111",
+    "user_pwd":"123",
+    "command":1
 }
 ```
 
@@ -1486,29 +1491,54 @@ public class LoginFrame extends JFrame {
 
 到处为止用户发送登录请求给服务器，完了图30-22中所示的第①步操作。
 
-代码第⑦行客户端调用 socket 对象的 `receive()` 方法等待服务器端应答。服务器端返回数据给客户端，代码第⑧行判断JSON对象中的result键是否等于0。代码第⑨行将JSON对象转换为Map到对象。
+代码第⑦行客户端调用 socket 对象的 `receive()` 方法等待服务器端应答。服务器端返回数据给客户端，代码第⑧行判断 JSON 对象中的 `result` 
+键是否等于0。代码第⑨行将 JSON 对象转换为 Map 到对象。
 
 从服务器端返回的 JSON 对象示例如下：
 
-```
+```json
 
-```
-
-代码第⑤行是创建数据包对象，JSON 对象编码后将数据包中。代码第⑥行是发送数据给指定服务器。到处为止用户发送登录请求给服务器，完了图6-22中所示的第①步操作。代码第⑦行客户端调用 socket 对象的 `receive()` 方法等待服务器端应答。服务器端返回数据给客户端，代码第⑧行判断 JSON 对象中的 result 键是否等于0。代码第⑨行将 JSON 对象转换为 Map 到对象。
-
-从服务器端返回的 JSON 对象示例如下：
-
-```
-
+{
+    "result":0,
+    "user_icon":"52",
+    "user_pwd":"123",
+    "user_id":"333",
+    "user_name":"赵 2",
+    "friends":[
+        {
+            "online":"1",
+            "user_icon":"28",
+            "user_pwd":"123",
+            "user_id":"111",
+            "user_name":"关 东 升"
+        },
+        {
+            "online":"1",
+            "user_icon":"30",
+            "user_pwd":"123",
+            "user_id":"222",
+            "user_name":"赵 1"
+        },
+        {
+            "online":"0",
+            "user_icon":"53",
+            "user_pwd":"123",
+            "user_id":"888",
+            "user_name":"赵 3"
+        }
+    ]
+}
 ```
 
 到此为止完了图6-22中所示的第③步操作。如果用户登录成功 login 方法会返回非空数据，登录失败 login 方法返回空。
 
-上述代码第②行判断 login 方法返回值是否为空，如果为非空登录成功则显示 FriendsFrame 窗口。
+上述代码第②行判断 login 方法返回值是否为空，如果为非空登录成功则显示 `FriendsFrame` 窗口。
 
 ### 6.3 迭代5.3：服务器启动
 
-在介绍服务器端编程之前，首先介绍服务器端启动程序 Server。`Server.java` 代码如下：
+在介绍服务器端编程之前，首先介绍服务器端启动程序 Server。
+
+`Server.java` 代码如下：
 
 ```java
 package com.lightwing.qq.server;
@@ -1527,28 +1557,28 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Server {
     // 命令代码
-    private static final int COMMAND_LOGIN = 1;     // 登录命令
+    private static final int COMMAND_LOGIN = 1;     // 登录命令   ①
     private static final int COMMAND_LOGOUT = 2;    // 注销命令
-    private static final int COMMAND_SENDMSG = 3;   // 发消息命令
+    private static final int COMMAND_SENDMSG = 3;   // 发消息命令 ②
 
-    private static int SERVER_PORT = 7788;
+    private static int SERVER_PORT = 7788; ③
     // 所有已经登录的客户端信息
-    private static List<ClientInfo> clientList = new CopyOnWriteArrayList<>();
+    private static List<ClientInfo> clientList = new CopyOnWriteArrayList<>(); ④
     // 创建数据访问对象
-    private static UserDAO dao = new UserDAO();
+    private static UserDAO dao = new UserDAO(); ⑤
 
     public static void main(String[] args) {
         if (args.length == 1) {
-            SERVER_PORT = Integer.parseInt(args[0]);
+            SERVER_PORT = Integer.parseInt(args[0]); ⑥
         }
 
-        System.out.printf("服务器启动, 监听自己的端口%d...\n", SERVER_PORT);
+        System.out.printf("服务器启动, 监听自己的端口%d...\n", SERVER_PORT); ⑦
 
         byte[] buffer = new byte[2048];
 
         try ( // 创建DatagramSocket对象，监听自己的端口7788
               DatagramSocket socket = new DatagramSocket(SERVER_PORT)) {
-            while (true) {
+            while (true) { ⑧
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
                 // 接收数据长度
@@ -1710,13 +1740,13 @@ public class Server {
 
 上述代码第①行~第②行定义了三个命令代码常量，与客户端都定义的三个命令代码保持一致。
 
-代码第③行声明了一个公有的静态端口号，端口号也可以通过main主方法的args参数传递进来，见代码第⑥行。
+代码第③行声明了一个公有的静态端口号，端口号也可以通过 main 主方法的 args 参数传递进来，见代码第⑥行。
 
-代码第④行创建List集合对象clientList，用来保存所有登录的客户端信息。
+代码第④行创建 List 集合对象 clientList，用来保存所有登录的客户端信息。
 
 **注意**　*List 的实例是 CopyOnWriteArrayList 对象，CopyOnWriteArrayList 是线程安全的 List 对象，ArrayList 是非线程安全。CopyOnWriteArrayList 使用了一种叫写入时复制（英语：Copy-on-write，简称 COW）的方法写，COW 是指在并发访问的集合修改集合元素时，不直接修改该集合，而是先复制一份副本，在副本上进行修改。修改完成之后，将指向原来集合的引用指向集合副本。*
 
-代码第⑤行是创建 UserDAO 数据访问对象。代码第⑦行实例化DatagramSocket 对象。代码第⑧行是服务器端循环，服务器端一直循环接收客户端数据和发送数据给客户端。
+代码第⑤行是创建 UserDAO 数据访问对象。代码第⑦行实例化 `DatagramSocket` 对象。代码第⑧行是服务器端循环，服务器端一直循环接收客户端数据和发送数据给客户端。
 
 ### 6.4 迭代5.4：服务器验证编程
 
@@ -1735,30 +1765,30 @@ while (true) {
     int port = packet.getPort();
     JSONObject jsonObj = new JSONObject(str);
     System.out.println(jsonObj);
-    int cmd = (int) jsonObj.get("command");
+    int cmd = (int) jsonObj.get("command"); ①
     
-    if (cmd == COMMAND_LOGIN) {// 用户登录过程
+    if (cmd == COMMAND_LOGIN) {// 用户登录过程 ②
         // 通过用户Id查询用户信息
-        String userId = (String) jsonObj.get("user_id");
+        String userId = (String) jsonObj.get("user_id"); ③
         Map<String, String> user = dao.findById(userId);
         
         // 判断客户端发送过来的密码与数据库的密码是否一致
-        if (user != null && jsonObj.get("user_pwd").equals(user.get("user_pwd"))) {
+        if (user != null && jsonObj.get("user_pwd").equals(user.get("user_pwd"))) { ④
             JSONObject sendJsonObj = new JSONObject(user);
             // 添加result:0键值对，0表示成功，-1表示失败
-            sendJsonObj.put("result", 0);
+            sendJsonObj.put("result", 0); ⑤
             ClientInfo cInfo = new ClientInfo();
             cInfo.setUserId(userId);
             cInfo.setAddress(address);
             cInfo.setPort(port);
-            clientList.add(cInfo);
+            clientList.add(cInfo); ⑥
             // 取出好友用户列表
-            List<Map<String, String>> friends = dao.findFriends(userId);
+            List<Map<String, String>> friends = dao.findFriends(userId); ⑦
             
             // 设置好友状态，更新friends集合，添加online字段
-            for (Map<String, String> friend : friends) {
+            for (Map<String, String> friend : friends) { ⑧
                 // 添加好友状态 1在线 0离线
-                friend.put("online", "0");
+                friend.put("online", "0"); ⑨
                 String fid = friend.get("user_id");
                 
                 // 好友在clientList集合中存在，则在线
@@ -1768,17 +1798,17 @@ while (true) {
                     // 好友在线
                     if (uid.equals(fid)) {
                         // 更新好友状态 1在线 0离线
-                        friend.put("online", "1");
+                        friend.put("online", "1"); ⑩
                         break;
                     }
                 }
             }
             
-            sendJsonObj.put("friends", friends);
+            sendJsonObj.put("friends", friends); ⑪
             // 创建DatagramPacket对象，用于向客户端发送数据
             byte[] b = sendJsonObj.toString().getBytes();
             packet = new DatagramPacket(b, b.length, address, port);
-            socket.send(packet);
+            socket.send(packet); ⑫
             
             // 广播当前用户上线了
             for (ClientInfo info : clientList) {
@@ -1796,11 +1826,11 @@ while (true) {
         } else {
             // 送失败消息
             JSONObject sendJsonObj = new JSONObject();
-            sendJsonObj.put("result", -1);
+            sendJsonObj.put("result", -1); ⑬
             byte[] b = sendJsonObj.toString().getBytes();
             packet = new DatagramPacket(b, b.length, address, port);
             // 向请求登录的客户端发送数据
-            socket.send(packet);
+            socket.send(packet); ⑭
         }
     } else if (cmd == COMMAND_SENDMSG) {// 用户发送消息
         // 获得好友Id
@@ -1844,7 +1874,8 @@ while (true) {
 }
 ```
 
-上述代码第①行是从客户端传递过来的命令。代码第②行是判断命令是否为用户登录命令。代码第③行从客户端传递过来的用户ID。代码第④行判断客户端传递过来密码与数据库查询出来的密码是否一致。如果密码一致登录成功，代码第⑤行将 `result:0` 键值对放入 JSON 对象。代码第⑥行将用户所在客户端信息添加到 `clientList` 集合中。
+上述代码第①行是从客户端传递过来的命令。代码第②行是判断命令是否为用户登录命令。代码第③行从客户端传递过来的用户 
+ID。代码第④行判断客户端传递过来密码与数据库查询出来的密码是否一致。如果密码一致登录成功，代码第⑤行将 `result:0` 键值对放入 JSON 对象。代码第⑥行将用户所在客户端信息添加到 `clientList` 集合中。
 
 代码第⑦行根据用户 ID 获取好友用户列表。
 
@@ -1858,7 +1889,7 @@ while (true) {
 
 用户登录成功后，需要给其他客户端发送通知，通知该用户上线，客户端需要刷新好友列表。这个过程如图7-23所示，其中第①步和第②步在任务5已经介绍了，这里不再赘述。第③步：广播用户1登录成功。第④步：客户端刷新好友列表。
 
-![用户登陆刷新好友列表过程]()
+![用户登陆刷新好友列表过程](img/刷新好友列表过程.png)
 
 ### 7.1 迭代6.1：用户登录刷新好友列表服务器端编程
 
@@ -1867,7 +1898,6 @@ while (true) {
 `Server.java` 代码如下：
 
 ```java
-
 if (cmd == COMMAND_LOGIN) {// 用户登录过程
     // 通过用户Id查询用户信息
     String userId = (String) jsonObj.get("user_id");
@@ -1912,16 +1942,16 @@ if (cmd == COMMAND_LOGIN) {// 用户登录过程
         socket.send(packet);
         
         // 广播当前用户上线了
-        for (ClientInfo info : clientList) {
+        for (ClientInfo info : clientList) { ①
             // 给其他好友发送，当前用户上线消息
-            if (!info.getUserId().equals(userId)) {
+            if (!info.getUserId().equals(userId)) { ②
                 jsonObj = new JSONObject();
                 jsonObj.put("user_id", userId);
-                jsonObj.put("online", "1");
+                jsonObj.put("online", "1"); ③
                 byte[] b2 = jsonObj.toString().getBytes();
                 packet = new DatagramPacket(b2, b2.length, info.getAddress(), info.getPort());
                 // 转发给好友
-                socket.send(packet);
+                socket.send(packet); ④
             }
         }
     } else {
@@ -1976,8 +2006,11 @@ if (cmd == COMMAND_LOGIN) {// 用户登录过程
 
 上述代码第①行广播当前用户上线，代码第②行判断如果不是当前用户，则发送消息给其他用户，通过他们当前用户已经上线。代码第③行设当前用户在线状态为1（上线）。代码第④行是发送消息给其他用户。如果当前用户是222，那么其他用户会收如下 JSON 消息。
 
-```
-
+```json
+{
+    "user_id":"222",
+    "online":"1"
+}
 ```
 
 ### 7.2 迭代6.2：用户登录刷新好友列表客户端编程
@@ -2006,7 +2039,7 @@ import java.util.Map;
 
 public class FriendsFrame extends JFrame implements Runnable {
     // 线程运行状态
-    private boolean isRunning = true;
+    private boolean isRunning = true; ①
     // 好友标签控件列表
     private List<JLabel> lblFriendList;
 
@@ -2014,7 +2047,7 @@ public class FriendsFrame extends JFrame implements Runnable {
         setTitle("QQ2006");
         // 初始化成员变量
         // 用户信息
-        /// 初始化用户列表
+        // 初始化用户列表
         // 好友列表
         List<Map<String, String>> friends = (List<Map<String, String>>) user.get("friends");
 
@@ -2123,11 +2156,11 @@ public class FriendsFrame extends JFrame implements Runnable {
         });
 
         // 启动接收消息子线程
-        resetThread();
+        resetThread(); ②
     }
 
     @Override
-    public void run() {
+    public void run() { ③
         // 准备一个缓冲区
         byte[] buffer = new byte[1024];
         while (isRunning) {
@@ -2136,7 +2169,7 @@ public class FriendsFrame extends JFrame implements Runnable {
                 // 接收数据报
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, Client.SERVER_PORT);
                 // 开始接收
-                Client.socket.receive(packet);
+                Client.socket.receive(packet); ④
                 // 接收数据长度
                 int len = packet.getLength();
                 String str = new String(buffer, 0, len);
@@ -2146,7 +2179,7 @@ public class FriendsFrame extends JFrame implements Runnable {
                 String online = (String) jsonObj.get("online");
 
                 // 刷新好友列表
-                refreshFriendList(userId, online);
+                refreshFriendList(userId, online); ⑤
 
             } catch (Exception ignored) {
             }
@@ -2158,7 +2191,7 @@ public class FriendsFrame extends JFrame implements Runnable {
         // 初始化好友列表
         for (JLabel lblFriend : lblFriendList) {
             // 判断用户Id是否一致
-            if (userId.equals(lblFriend.getToolTipText())) {
+            if (userId.equals(lblFriend.getToolTipText())) { ⑥
                 if (online.equals("1")) {
                     lblFriend.setEnabled(true);
                 } else {
@@ -2169,25 +2202,29 @@ public class FriendsFrame extends JFrame implements Runnable {
     }
 
     // 重新启动接收消息子线程
-    void resetThread() {
+    void resetThread() { ⑦
         isRunning = true;
         // 接收消息子线程
-        Thread receiveMessageThread = new Thread(this);
+        Thread receiveMessageThread = new Thread(this); ⑧
         // 启动接收消息线程
-        receiveMessageThread.start();
+        receiveMessageThread.start(); ⑨
     }
 }
 ```
 
 上述代码第①行定义线程运行状态，默认为 `true`。代码第②行调用 `resetThread()` 方法启动线程。代码第③行是实现线程体，一直接收服务器端返回的消息，代码第④行是接收方法。接收的 JSON 消息格式如下：
 
-```
-
+```json
+{
+    "user_id":"222",
+    "online":"1"
+}
 ```
 
 如果接收到来自于服务器端的消息，则调用代码第⑤行 `refreshFriendList(userId,online)` 方法刷新用户好友列表。
 
-在 `refreshFriendList` 方法中，代码第⑥行判断用户Id是否与标签的 `ToolTipText` 属性一致，如果一致则设置标签可用，表明用户上线了；否则不可用，说明用户下线了。注意：标签 `ToolTipText` 属性保存的用户 ID，Text 属性保存的用户名。代码第⑦行定义重新启动接收消息子线程方法 `resetThread()`，该方法用来启动一个接收消息子线程。当用户登录成功时进入好友列表窗口时，或关闭聊天窗口回到好友列表窗口时调用该方法。代码第⑧行是创建接收消息的子线程。代码第⑨行是启动接收消息子线程。
+在 `refreshFriendList` 方法中，代码第⑥行判断用户 Id 是否与标签的 `ToolTipText` 
+属性一致，如果一致则设置标签可用，表明用户上线了；否则不可用，说明用户下线了。注意：标签 `ToolTipText` 属性保存的用户 ID，Text 属性保存的用户名。代码第⑦行定义重新启动接收消息子线程方法 `resetThread()`，该方法用来启动一个接收消息子线程。当用户登录成功时进入好友列表窗口时，或关闭聊天窗口回到好友列表窗口时调用该方法。代码第⑧行是创建接收消息的子线程。代码第⑨行是启动接收消息子线程。
 
 ## 8 任务7：聊天过程实现
 
@@ -2199,7 +2236,7 @@ public class FriendsFrame extends JFrame implements Runnable {
 
 第③步：客户端用户3接收用户1消息。
 
-![聊天过程]()
+![聊天过程](img/聊天过程.png)
 
 8.1 迭代7.1：客户端用户1向用户3发送消息客户端用户1向用户3发送消息实现是在聊天窗口 `ChatFrame` 中实现的。
 
@@ -2345,35 +2382,35 @@ public class ChatFrame extends JFrame implements Runnable {
 
         JButton button = new JButton("发送");
         button.setBounds(232, 10, 90, 30);
-        button.addActionListener(e -> {
+        button.addActionListener(e -> { ①
             sendMessage();
             txtInfo.setText("");
         });
         return button;
     }
 
-    private void sendMessage() {
+    private void sendMessage() { ②
         if (!txtInfo.getText().equals("")) {
             // 获得当前时间，并格式化
             String date = dateFormat.format(new Date());
             String info = String.format("#%s#" + "\n" + "您对%s说：%s", date, friendUserName, txtInfo.getText());
             infoLog.append(info).append('\n');
-            txtMianInfo.setText(infoLog.toString());
+            txtMianInfo.setText(infoLog.toString()); ③
 
             Map<String, String> message = new HashMap<>();
             message.put("receive_user_id", friendUserId);
             message.put("user_id", userId);
             message.put("message", txtInfo.getText());
 
-            JSONObject jsonObj = new JSONObject(message);
-            jsonObj.put("command", Client.COMMAND_SENDMSG);
+            JSONObject jsonObj = new JSONObject(message); ④
+            jsonObj.put("command", Client.COMMAND_SENDMSG); ⑤
 
             try {
                 InetAddress address = InetAddress.getByName(Client.SERVER_IP);
                 // 发送数据报
                 byte[] b = jsonObj.toString().getBytes();
                 DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT);
-                Client.socket.send(packet);
+                Client.socket.send(packet); ⑥
             } catch (IOException ignored) {
             }
         }
@@ -2426,12 +2463,17 @@ public class ChatFrame extends JFrame implements Runnable {
 }
 ```
 
-上述代码第①行是当用户单击发送按钮时调用 `sendMessage()` 方法。代码第②行定义 `sendMessage()` 方法。代码第③行更新txtMainInfo（显示聊天记录）组件内容。
+上述代码第①行是当用户单击发送按钮时调用 `sendMessage()` 方法。代码第②行定义 `sendMessage()` 方法。代码第③行更新 txtMainInfo（显示聊天记录）组件内容。
 
 代码第④行是创建 JSON 对象，message 是客户端发送给服务器的消息。代码第⑤行是添加命令为发聊天消息命令。代码第⑥行是发送数据给服务器端。
 
 ```json
-
+{
+    "receive_user_id":"222",
+    "message":"你好吗？",
+    "user_id":"111",
+    "command":3
+}
 ```
 
 ### 8.2　迭代7.2：服务器接收用户1消息与转发给用户3消息
@@ -2439,7 +2481,201 @@ public class ChatFrame extends JFrame implements Runnable {
 服务器接收用户1消息与转发给用户3消息是在 Server 中完成，相关代码如下：
 
 ```java
+package com.lightwing.qq.server;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class Server {
+    // 命令代码
+    private static final int COMMAND_LOGIN = 1;     // 登录命令
+    private static final int COMMAND_LOGOUT = 2;    // 注销命令
+    private static final int COMMAND_SENDMSG = 3;   // 发消息命令
+
+    private static int SERVER_PORT = 7788;
+    // 所有已经登录的客户端信息
+    private static List<ClientInfo> clientList = new CopyOnWriteArrayList<>();
+    // 创建数据访问对象
+    private static UserDAO dao = new UserDAO();
+
+    public static void main(String[] args) {
+        if (args.length == 1) {
+            SERVER_PORT = Integer.parseInt(args[0]);
+        }
+
+        System.out.printf("服务器启动, 监听自己的端口%d...\n", SERVER_PORT);
+
+        byte[] buffer = new byte[2048];
+
+        try ( // 创建DatagramSocket对象，监听自己的端口7788
+              DatagramSocket socket = new DatagramSocket(SERVER_PORT)) {
+            while (true) {
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                socket.receive(packet);
+                // 接收数据长度
+                int len = packet.getLength();
+                String str = new String(buffer, 0, len);
+                // 从客户端传来的数据包中得到客户端地址
+                InetAddress address = packet.getAddress();
+                // 从客户端传来的数据包中得到客户端端口号
+                int port = packet.getPort();
+
+                JSONObject jsonObj = new JSONObject(str);
+                System.out.println(jsonObj);
+
+                int cmd = (int) jsonObj.get("command");
+
+                if (cmd == COMMAND_LOGIN) {// 用户登录过程
+                    // 通过用户Id查询用户信息
+                    String userId = (String) jsonObj.get("user_id");
+                    Map<String, String> user = dao.findById(userId);
+
+                    // 判断客户端发送过来的密码与数据库的密码是否一致
+                    if (user != null && jsonObj.get("user_pwd").equals(user.get("user_pwd"))) {
+                        JSONObject sendJsonObj = new JSONObject(user);
+                        // 添加result:0键值对，0表示成功，-1表示失败
+                        sendJsonObj.put("result", 0);
+
+                        ClientInfo cInfo = new ClientInfo();
+                        cInfo.setUserId(userId);
+                        cInfo.setAddress(address);
+                        cInfo.setPort(port);
+                        clientList.add(cInfo);
+
+                        // 取出好友用户列表
+                        List<Map<String, String>> friends = dao.findFriends(userId);
+
+                        // 设置好友状态，更新friends集合，添加online字段
+                        for (Map<String, String> friend : friends) {
+                            // 添加好友状态 1在线 0离线
+                            friend.put("online", "0");
+                            String fid = friend.get("user_id");
+                            // 好友在clientList集合中存在，则在线
+                            for (ClientInfo c : clientList) {
+                                String uid = c.getUserId();
+                                // 好友在线
+                                if (uid.equals(fid)) {
+                                    // 更新好友状态 1在线 0离线
+                                    friend.put("online", "1");
+                                    break;
+                                }
+                            }
+                        }
+                        sendJsonObj.put("friends", friends);
+
+                        // 创建DatagramPacket对象，用于向客户端发送数据
+                        byte[] b = sendJsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b, b.length, address, port);
+
+                        socket.send(packet);
+
+                        // 广播当前用户上线了
+                        for (ClientInfo info : clientList) {
+                            // 给其他好友发送，当前用户上线消息
+                            if (!info.getUserId().equals(userId)) {
+                                jsonObj = new JSONObject();
+                                jsonObj.put("user_id", userId);
+                                jsonObj.put("online", "1");
+
+                                byte[] b2 = jsonObj.toString().getBytes();
+                                packet = new DatagramPacket(b2, b2.length, info.getAddress(), info.getPort());
+                                // 转发给好友
+                                socket.send(packet);
+                            }
+                        }
+
+                    } else {
+                        // 送失败消息
+                        JSONObject sendJsonObj = new JSONObject();
+                        sendJsonObj.put("result", -1);
+                        byte[] b = sendJsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b, b.length, address, port);
+                        // 向请求登录的客户端发送数据
+                        socket.send(packet);
+                    }
+                } else if (cmd == COMMAND_SENDMSG) {
+                    // 用户发送消息
+                    // 获得好友Id
+                    String friendUserId = (String) jsonObj.get("receive_user_id");
+
+                    // 向客户端发送数据
+                    for (ClientInfo info : clientList) {
+                        // 找到好友的IP地址和端口号
+                        if (info.getUserId().equals(friendUserId)) {
+                            jsonObj.put("OnlineUserList", getUserOnlineStateList());
+                            // 创建DatagramPacket对象，用于向客户端发送数据
+                            byte[] b = jsonObj.toString().getBytes();
+                            packet = new DatagramPacket(b, b.length, info.getAddress(), info.getPort());
+                            // 转发给好友
+                            socket.send(packet);
+                            break;
+                        }
+                    }
+                } else if (cmd == COMMAND_LOGOUT) {
+                    // 用户发送注销命令
+                    // 获得用户Id
+                    String userId = (String) jsonObj.get("user_id");
+
+                    // 从clientList集合中删除用户
+                    for (ClientInfo info : clientList) {
+                        if (info.getUserId().equals(userId)) {
+                            clientList.remove(info);
+                            break;
+                        }
+                    }
+
+                    // 向其他客户端广播该用户下线
+                    for (ClientInfo info : clientList) {
+                        jsonObj = new JSONObject();
+                        jsonObj.put("user_id", userId);
+                        jsonObj.put("online", "0");
+                        byte[] b2 = jsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b2, b2.length, info.getAddress(), info.getPort());
+                        socket.send(packet);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 获得用户在线状态
+    private static List<Map<String, String>> getUserOnlineStateList() {
+        // 从数据库查询所有用户信息
+        List<Map<String, String>> userList = dao.findAll();
+        // 保存用户在线状态集合
+        List<Map<String, String>> list = new ArrayList<>();
+        for (Map<String, String> user : userList) {
+
+            String userId = user.get("user_id");
+            Map<String, String> map = new HashMap<>();
+            map.put("user_id", userId);
+            // 默认离线
+            map.put("online", "0");
+
+            for (ClientInfo info : clientList) {
+                //如果clientList（已经登录的客户端信息）中有该用户，则该用户在线
+                if (info.getUserId().equals(userId)) {
+                    // 设置为在线
+                    map.put("online", "1");
+                    break;
+                }
+            }
+            list.add(map);
+        }
+        return list;
+    }
+}
 ```
 
 上述代码第①行是判断客户端命名是否为“用户发送聊天消息”。代码第②行获得接收消息的用户 ID。要想给用户3发消息，需要在 `clientList` 集合中查找该用户，代码第③行是判断是否找到该用户，如果找该用户那么可以从 `clientList` 返回，该用户的客户端主机 IP 地址和端口号码，有了这些信息就可以给他发消息了。
@@ -2447,7 +2683,30 @@ public class ChatFrame extends JFrame implements Runnable {
 代码第④行是向发给用户3的消息中添加 `OnlineUserList` 消息，`OnlineUserList` 是所有用户的登录状态，这是为了让客户端在聊天的同时也能刷新好友列表。添加 `OnlineUserList` 消息后，发给用户3的消息如下：
 
 ```json
-
+{
+    "user_id":"111",
+    "receive_user_id":"222",
+    "message":"你好吗？",
+    "OnlineUserList":[
+        {
+            "user_id":"111",
+            "online":"1"
+        },
+        {
+            "user_id":"222",
+            "online":"1"
+        },
+        {
+            "user_id":"333",
+            "online":"0"
+        },
+        {
+            "user_id":"888",
+            "online":"0"
+        }
+    ],
+    "command":3
+}
 ```
 
 通过 `getUserOnlineStateList()` 方法可以获得所有用户状态，该方法定义见代码第⑤行。在该方法中首先从数据中查询所有的用户信息，然后进行遍历，见代码第⑥行。遍历获得一个用户信息，那么如何判断这个用户是否在线呢？这需要在 `clientList` 集合中查找，如果 `clientList` 中有该用户，则该用户在线，见代码第⑦行和第⑧行。
@@ -2691,37 +2950,425 @@ public class ChatFrame extends JFrame implements Runnable {
 
 第③步：客户端刷新好友列表。
 
-![用户下线刷新好友列表]()
+![用户下线刷新好友列表](img/下线通知.png)
 
 ### 9.1 迭代8.1：客户端编程
 
 用户关闭好友列表窗口触发下线处理，`FriendsFrame.java` 相关代码如下：
 
 ```java
+package com.lightwing.qq.client;
 
+import org.json.JSONObject;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class FriendsFrame extends JFrame implements Runnable {
+    // 线程运行状态
+    private boolean isRunning = true;
+    // 好友标签控件列表
+    private List<JLabel> lblFriendList;
+
+    public FriendsFrame(Map user) {
+        setTitle("QQ2006");
+        // 初始化成员变量
+        // 用户信息
+        /// 初始化用户列表
+        // 好友列表
+        List<Map<String, String>> friends = (List<Map<String, String>>) user.get("friends");
+
+        // 设置布局
+        BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
+        borderLayout.setVgap(5);
+
+        String userId = (String) user.get("user_id");
+        String userName = (String) user.get("user_name");
+        String userIcon = (String) user.get("user_icon");
+
+        JLabel lblLabel = new JLabel(userName);
+        lblLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        String iconFile = String.format("/resource/img/%s.jpg", userIcon);
+        lblLabel.setIcon(new ImageIcon(FriendsFrame.class.getResource(iconFile)));
+        getContentPane().add(lblLabel, BorderLayout.NORTH);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.blue, 1));
+
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        JPanel panel1 = new JPanel();
+        scrollPane.setViewportView(panel1);
+        panel1.setLayout(new BorderLayout(0, 0));
+
+        JLabel label = new JLabel("我的好友");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        panel1.add(label, BorderLayout.NORTH);
+
+        // 好友列表面板
+        JPanel friendListPanel = new JPanel();
+        panel1.add(friendListPanel);
+        friendListPanel.setLayout(new GridLayout(50, 0, 0, 5));
+
+        lblFriendList = new ArrayList<>();
+        // 初始化好友列表
+        for (Map<String, String> friend : friends) {
+            String friendUserId = friend.get("user_id");
+            String friendUserName = friend.get("user_name");
+            String friendUserIcon = friend.get("user_icon");
+            // 获得好友在线状态
+            String friendUserOnline = friend.get("online");
+            JLabel lblFriend = new JLabel(friendUserName);
+            lblFriend.setToolTipText(friendUserId);
+            String friendIconFile = String.format("/resource/img/%s.jpg", friendUserIcon);
+            lblFriend.setIcon(new ImageIcon(FriendsFrame.class.getClass().getResource(friendIconFile)));
+            // 在线设置可用，离线设置不可用
+            if (friendUserOnline.equals("0")) {
+                lblFriend.setEnabled(false);
+            } else {
+                lblFriend.setEnabled(true);
+            }
+
+            lblFriend.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // 用户图标双击鼠标时显示对话框
+                    if (e.getClickCount() == 2) {
+                        ChatFrame chatFrame = new ChatFrame(FriendsFrame.this, user, friend);
+                        chatFrame.setVisible(true);
+                        isRunning = false;
+                    }
+                }
+            });
+            // 添加到列表集合
+            lblFriendList.add(lblFriend);
+            // 添加到面板
+            friendListPanel.add(lblFriend);
+        }
+
+        /// 初始化当前Frame
+        setSize(150, 600);
+        // 获得当前屏幕的宽
+        double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        // 登录窗口宽高
+        int frameWidth = 260;
+        int frameHeight = 600;
+        setBounds((int) screenWidth - 300, 10, frameWidth, frameHeight);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FriendsFrame.class.getResource("/resource/img/QQ.png")));
+
+        // 注册窗口事件
+        addWindowListener(new WindowAdapter() {
+            // 单击窗口关闭按钮时调用
+            public void windowClosing(WindowEvent e) {
+                // 准备一个缓冲区
+                byte[] buffer = new byte[0b10000000000];
+                // 当前用户下线
+                JSONObject jsonObj = new JSONObject();
+                jsonObj.put("command", Client.COMMAND_LOGOUT);
+                jsonObj.put("user_id", userId);
+                byte[] b = jsonObj.toString().getBytes();
+
+                InetAddress address;
+                try {
+                    address = InetAddress.getByName(Client.SERVER_IP);
+                    // 创建DatagramPacket对象
+                    DatagramPacket packet = new DatagramPacket(b, b.length, address, Client.SERVER_PORT);
+                    // 发送
+                    Client.socket.send(packet);
+                } catch (IOException ignored) {
+                }
+                // 退出系统
+                System.exit(0);
+            }
+        });
+
+        // 启动接收消息子线程
+        resetThread();
+    }
+
+    @Override
+    public void run() {
+        // 准备一个缓冲区
+        byte[] buffer = new byte[1024];
+        while (isRunning) {
+            try {
+                InetAddress address = InetAddress.getByName(Client.SERVER_IP);
+                // 接收数据报
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, Client.SERVER_PORT);
+                // 开始接收
+                Client.socket.receive(packet);
+                // 接收数据长度
+                int len = packet.getLength();
+                String str = new String(buffer, 0, len);
+                System.out.println("客户端：  " + str);
+                JSONObject jsonObj = new JSONObject(str);
+                String userId = (String) jsonObj.get("user_id");
+                String online = (String) jsonObj.get("online");
+
+                // 刷新好友列表
+                refreshFriendList(userId, online);
+
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
+    // 刷新好友列表
+    void refreshFriendList(String userId, String online) {
+        // 初始化好友列表
+        for (JLabel lblFriend : lblFriendList) {
+            // 判断用户Id是否一致
+            if (userId.equals(lblFriend.getToolTipText())) {
+                if (online.equals("1")) {
+                    lblFriend.setEnabled(true);
+                } else {
+                    lblFriend.setEnabled(false);
+                }
+            }
+        }
+    }
+
+    // 重新启动接收消息子线程
+    void resetThread() {
+        isRunning = true;
+        // 接收消息子线程
+        Thread receiveMessageThread = new Thread(this);
+        // 启动接收消息线程
+        receiveMessageThread.start();
+    }
+}
 ```
 
 上述代码第①行是用户关闭窗口时候调用。代码第②行创建 JSON 对象。代码第③行设置命令。代码第④行发送下线消息。发送的 JSON 消息格式如下：
 
-```
-
+```json
+{
+    "user_id":"111",
+    "command":2
+}
 ```
 
 9.2 迭代8.2：服务器端编程服务器端接收用户下线消息，广播给其他用户的客户端。
 
 `Server.java` 代码如下：
 
-```
+```java
+package com.lightwing.qq.server;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class Server {
+    // 命令代码
+    private static final int COMMAND_LOGIN = 1;     // 登录命令
+    private static final int COMMAND_LOGOUT = 2;    // 注销命令
+    private static final int COMMAND_SENDMSG = 3;   // 发消息命令
+
+    private static int SERVER_PORT = 7788;
+    // 所有已经登录的客户端信息
+    private static List<ClientInfo> clientList = new CopyOnWriteArrayList<>();
+    // 创建数据访问对象
+    private static UserDAO dao = new UserDAO();
+
+    public static void main(String[] args) {
+        if (args.length == 1) {
+            SERVER_PORT = Integer.parseInt(args[0]);
+        }
+
+        System.out.printf("服务器启动, 监听自己的端口%d...\n", SERVER_PORT);
+
+        byte[] buffer = new byte[2048];
+
+        try ( // 创建DatagramSocket对象，监听自己的端口7788
+              DatagramSocket socket = new DatagramSocket(SERVER_PORT)) {
+            while (true) {
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                socket.receive(packet);
+                // 接收数据长度
+                int len = packet.getLength();
+                String str = new String(buffer, 0, len);
+                // 从客户端传来的数据包中得到客户端地址
+                InetAddress address = packet.getAddress();
+                // 从客户端传来的数据包中得到客户端端口号
+                int port = packet.getPort();
+
+                JSONObject jsonObj = new JSONObject(str);
+                System.out.println(jsonObj);
+
+                int cmd = (int) jsonObj.get("command");
+
+                if (cmd == COMMAND_LOGIN) {// 用户登录过程
+                    // 通过用户Id查询用户信息
+                    String userId = (String) jsonObj.get("user_id");
+                    Map<String, String> user = dao.findById(userId);
+
+                    // 判断客户端发送过来的密码与数据库的密码是否一致
+                    if (user != null && jsonObj.get("user_pwd").equals(user.get("user_pwd"))) {
+                        JSONObject sendJsonObj = new JSONObject(user);
+                        // 添加result:0键值对，0表示成功，-1表示失败
+                        sendJsonObj.put("result", 0);
+
+                        ClientInfo cInfo = new ClientInfo();
+                        cInfo.setUserId(userId);
+                        cInfo.setAddress(address);
+                        cInfo.setPort(port);
+                        clientList.add(cInfo);
+
+                        // 取出好友用户列表
+                        List<Map<String, String>> friends = dao.findFriends(userId);
+
+                        // 设置好友状态，更新friends集合，添加online字段
+                        for (Map<String, String> friend : friends) {
+                            // 添加好友状态 1在线 0离线
+                            friend.put("online", "0");
+                            String fid = friend.get("user_id");
+                            // 好友在clientList集合中存在，则在线
+                            for (ClientInfo c : clientList) {
+                                String uid = c.getUserId();
+                                // 好友在线
+                                if (uid.equals(fid)) {
+                                    // 更新好友状态 1在线 0离线
+                                    friend.put("online", "1");
+                                    break;
+                                }
+                            }
+                        }
+                        sendJsonObj.put("friends", friends);
+
+                        // 创建DatagramPacket对象，用于向客户端发送数据
+                        byte[] b = sendJsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b, b.length, address, port);
+
+                        socket.send(packet);
+
+                        // 广播当前用户上线了
+                        for (ClientInfo info : clientList) {
+                            // 给其他好友发送，当前用户上线消息
+                            if (!info.getUserId().equals(userId)) {
+                                jsonObj = new JSONObject();
+                                jsonObj.put("user_id", userId);
+                                jsonObj.put("online", "1");
+
+                                byte[] b2 = jsonObj.toString().getBytes();
+                                packet = new DatagramPacket(b2, b2.length, info.getAddress(), info.getPort());
+                                // 转发给好友
+                                socket.send(packet);
+                            }
+                        }
+
+                    } else {
+                        // 送失败消息
+                        JSONObject sendJsonObj = new JSONObject();
+                        sendJsonObj.put("result", -1);
+                        byte[] b = sendJsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b, b.length, address, port);
+                        // 向请求登录的客户端发送数据
+                        socket.send(packet);
+                    }
+                } else if (cmd == COMMAND_SENDMSG) {
+                    // 用户发送消息 ①
+                    // 获得好友Id
+                    String friendUserId = (String) jsonObj.get("receive_user_id"); ②
+
+                    // 向客户端发送数据
+                    for (ClientInfo info : clientList) {
+                        // 找到好友的IP地址和端口号
+                        if (info.getUserId().equals(friendUserId)) { ③
+                            jsonObj.put("OnlineUserList", getUserOnlineStateList()); ④
+                            // 创建DatagramPacket对象，用于向客户端发送数据
+                            byte[] b = jsonObj.toString().getBytes();
+                            packet = new DatagramPacket(b, b.length, info.getAddress(), info.getPort());
+                            // 转发给好友
+                            socket.send(packet);
+                            break;
+                        }
+                    }
+                } else if (cmd == COMMAND_LOGOUT) {
+                    // 用户发送注销命令
+                    // 获得用户Id
+                    String userId = (String) jsonObj.get("user_id");
+
+                    // 从clientList集合中删除用户
+                    for (ClientInfo info : clientList) {
+                        if (info.getUserId().equals(userId)) {
+                            clientList.remove(info);
+                            break;
+                        }
+                    }
+
+                    // 向其他客户端广播该用户下线
+                    for (ClientInfo info : clientList) {
+                        jsonObj = new JSONObject();
+                        jsonObj.put("user_id", userId);
+                        jsonObj.put("online", "0");
+                        byte[] b2 = jsonObj.toString().getBytes();
+                        packet = new DatagramPacket(b2, b2.length, info.getAddress(), info.getPort());
+                        socket.send(packet);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 获得用户在线状态
+    private static List<Map<String, String>> getUserOnlineStateList() { ⑤
+        // 从数据库查询所有用户信息
+        List<Map<String, String>> userList = dao.findAll();
+        // 保存用户在线状态集合
+        List<Map<String, String>> list = new ArrayList<>();
+        for (Map<String, String> user : userList) { ⑥
+
+            String userId = user.get("user_id");
+            Map<String, String> map = new HashMap<>();
+            map.put("user_id", userId);
+            // 默认离线
+            map.put("online", "0");
+
+            for (ClientInfo info : clientList) { ⑦
+                //如果clientList（已经登录的客户端信息）中有该用户，则该用户在线
+                if (info.getUserId().equals(userId)) { ⑧
+                    // 设置为在线
+                    map.put("online", "1");
+                    break;
+                }
+            }
+            list.add(map);
+        }
+        return list;
+    }
+}
 ```
 
 上述代码第①行判断命令是用户注销命令。代码第②行是获得当前用户 ID，代码第③行遍历集合 `clientList`，代码第④行从集合中删除用户信息。
 
 代码第⑤行遍历集合 `clientList`，分别给其它客户端发送当前用户下线。JSON 消息格式如下：
 
-```java
-
+```json
+{
+    "user_id":"111",
+    "online":"0"
+}
 ```
 
 客户端接收下线信息，并更新好友列表。这个过程与登录成功，刷新好友列表代码共用，具体代码请参考7.2节的迭代6.2任务，这里不再赘述。
-
