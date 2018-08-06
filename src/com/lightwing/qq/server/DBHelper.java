@@ -13,7 +13,6 @@ class DBHelper {
     private static String url;
     // 创建 Properties 对象
     private static Properties info = new Properties();
-
     // 1.驱动程序加载
     static {
         // 获得属性文件输入流

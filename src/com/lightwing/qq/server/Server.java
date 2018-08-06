@@ -168,11 +168,10 @@ public class Server {
 
     // 获得用户在线状态
     private static List<Map<String, String>> getUserOnlineStateList() {
-        //从数据库查询所有用户信息
+        // 从数据库查询所有用户信息
         List<Map<String, String>> userList = dao.findAll();
-        //保存用户在线状态集合
+        // 保存用户在线状态集合
         List<Map<String, String>> list = new ArrayList<>();
-
         for (Map<String, String> user : userList) {
 
             String userId = user.get("user_id");
